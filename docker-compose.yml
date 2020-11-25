@@ -1,0 +1,52 @@
+version: "3.2"
+services:
+  web:
+    container_name: mypc-nginx
+    restart: always
+    image: nginx:latest
+    ports:
+      - 80:80
+    volumes:
+      - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./volumes/nginx:/usr/share/nginx
+    environment:
+      TZ: Asia/Tokyo
+
+  js-dev:
+    container_name: mypc-js-dev
+    build: 
+      context: ./config/nodejs/
+      args:
+        USER_UID: 1000
+        USER_GID: 1000
+    volumes:
+      - ./volumes/nginx:/var/www
+    tty: true
+    environment: 
+      TZ: Asia/Tokyo
+    working_dir: /var/www
+
+
+  db:
+    container_name: mypc-mariadb
+    restart: always
+    image: mariadb:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - ./volumes/mariadb:/var/lib/mysql
+    environment:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: p@ssword
+
+  portainer:
+    container_name: mypc-portainer
+    restart: always
+    image: portainer/portainer-ce
+    ports:
+      - 9900:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./volumes/portainer:/data
+    environment:
+      TZ: Asia/Tokyo
