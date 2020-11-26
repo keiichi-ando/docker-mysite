@@ -1,8 +1,13 @@
 <template>
   <section>
     <b-tabs type="is-boxed">
-      <b-tab-item label="Docker" icon="box-open">
-        <div class="subtitle">Docker / Portainer</div>
+      <b-tab-item label="Docker" icon="docker">
+        <div class="subtitle">
+          <b-icon icon="docker" size="is-large"></b-icon>
+          <b-icon icon="docker" size="is-medium"></b-icon>
+          <b-icon icon="docker" size="is-small"></b-icon>
+          Docker / Portainer
+        </div>
         <ul>
           <li><a href="/portainer">Docker status (Portainer)</a></li>
           <li>
@@ -12,7 +17,8 @@
           </li>
         </ul>
       </b-tab-item>
-      <b-tab-item label="Git" icon="library-music">
+      <!-- <b-tab-item label="Git" icon-pack="fas" icon="code-branch"> -->
+      <b-tab-item label="Git" icon="git">
         <div class="subtitle">GitHub</div>
         <ul>
           <li>
@@ -21,13 +27,28 @@
           <li><a href="https://localhost:3000">Gitea (local)</a></li>
         </ul>
       </b-tab-item>
-      <b-tab-item label="css" icon="video">
+      <b-tab-item label="css" icon="file-code-outline">
         <div class="subtitle">css</div>
         <ul>
           <li><a href="https://buefy.org/documentation">buefy css</a></li>
-          <li><a href="https://www.pinterest.jp/pin/47991552267842993/">example tab 1</a></li>
-          <li><a href="https://www.pinterest.jp/pin/755197431248904771/">example tab 2</a></li>
-          <li><a href="https://www.pinterest.jp/pin/353391902007561691/">example 3</a></li>
+          <li>
+            <a href="https://materialdesignicons.com/">Material Design Icons</a>
+          </li>
+          <li>
+            <a href="https://www.pinterest.jp/pin/47991552267842993/"
+              >example tab 1</a
+            >
+          </li>
+          <li>
+            <a href="https://www.pinterest.jp/pin/755197431248904771/"
+              >example tab 2</a
+            >
+          </li>
+          <li>
+            <a href="https://www.pinterest.jp/pin/353391902007561691/"
+              >example 3</a
+            >
+          </li>
         </ul>
       </b-tab-item>
     </b-tabs>

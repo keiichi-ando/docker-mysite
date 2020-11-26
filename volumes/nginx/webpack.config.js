@@ -1,7 +1,8 @@
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const webpack = require('webpack');
+const webpack = require("webpack");
+const { loader } = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
@@ -42,6 +43,22 @@ module.exports = {
         loader: "vue-loader",
       },
       {
+        test: /\.(svg|woff|woff2|ttf|eot)$/,
+        loader: "file-loader",
+        options: {
+          outputPath: "fonts",
+          publicPath: "/assets/fonts",
+        },
+      },
+      {
+        test: /\.(png|jpe?g|svg|ico)$/,
+        loader: "file-loader",
+        options: {
+          outputPath: "images",
+          publicPath: "/assets/images",
+        },
+      },
+      {
         test: /\.(css|scss)$/,
         // use: [
         //   "style-loader",
@@ -71,16 +88,16 @@ module.exports = {
       filename: "css/styles.css",
     }),
     new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
     }),
   ],
   resolve: {
     extensions: ["*", ".js", ".vue"],
     alias: {
       vue$: "vue/dist/vue.esm.js",
-      '@': path.resolve(__dirname, 'src')
+      "@": path.resolve(__dirname, "src"),
     },
   },
 };
