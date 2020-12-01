@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App'
+import App from '@/layout/App'
 import router from './router'
 
 import Buefy from 'buefy'
