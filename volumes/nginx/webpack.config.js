@@ -6,12 +6,16 @@ const { loader } = require("mini-css-extract-plugin");
 
 module.exports = {
   entry: {
-    app: "./src/main.js",
+    main: "./src/main.js",
   },
   output: {
     publicPath: "./public/assets/",
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "./public/assets"), // path: path.resolve(__dirname, 'dist')
+  },
+  performance: {
+    maxEntrypointSize: 1024000,
+    maxAssetSize: 1024000
   },
   optimization: {
     splitChunks: {
