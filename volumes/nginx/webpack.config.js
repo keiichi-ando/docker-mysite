@@ -15,7 +15,7 @@ module.exports = {
   },
   performance: {
     maxEntrypointSize: 1024000,
-    maxAssetSize: 1024000
+    maxAssetSize: 1024000,
   },
   optimization: {
     splitChunks: {
@@ -95,6 +95,7 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery",
       "window.jQuery": "jquery",
+      "window.axios": "axios",
     }),
   ],
   resolve: {

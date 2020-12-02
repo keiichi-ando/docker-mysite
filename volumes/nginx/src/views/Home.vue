@@ -14,36 +14,84 @@
             </b-tab-item>
             <!-- Git -->
             <b-tab-item label="Git" icon="git">
-                <div class="subtitle">
-                    <b-icon icon="git"></b-icon>
-                    GitHub
-                </div>
-                <ul>
-                    <li><a href="https://github.com/keiichi-ando">GitHub (Keiichi-ando)</a></li>
-                    <li><a href="https://localhost:3000">Gitea (local)</a></li>
-                </ul>
+                <div v-html="md['git']"></div>
             </b-tab-item>
             <!-- develop -->
             <b-tab-item label="develop" icon="file-code-outline">
-                <div class="subtitle"><b-icon icon="language-css3"></b-icon>css</div>
-                <ul>
-                    <li><a href="https://buefy.org/documentation">buefy css</a></li>
-                    <li><a href="https://materialdesignicons.com/">Material Design Icons</a></li>
-                    <li><a href="https://www.pinterest.jp/pin/47991552267842993/">example tab 1</a></li>
-                    <li><a href="https://www.pinterest.jp/pin/755197431248904771/">example tab 2</a></li>
-                    <li><a href="https://www.pinterest.jp/pin/353391902007561691/">example 3</a></li>
-                </ul>
+                <div v-html="md['develop']"></div>
             </b-tab-item>
         </b-tabs>
     </section>
 </template>
 <script>
+// import 'vue-material-design-icons/styles.css';
+import marked from "marked";
+
 export default {
+    created() {
+        this.getDoc("git");
+        this.getDoc("develop");
+    },
     data() {
         return {
             activeTab: 0,
             showBooks: false,
+            md: [],
         };
+    },
+    methods: {
+        getDoc(name) {
+            var self = this;
+            window.axios
+                .get("/documents/" + name + ".md")
+                .then((response) => {
+                    self.$set(self.md, name, marked(response.data));
+                })
+                .catch((error) => {
+                    console.log(error);
+                    self.$set(self.md, name, "load md file fail!");
+                });
+        },
     },
 };
 </script>
+<style scoped lang="scss">
+.title,
+.subtitle {
+    color: #00ac73;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+/deep/ h1,
+/deep/ h2 {
+    @extend .title;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.25;
+}
+.icon {
+    color: #4a4a4a;
+    font-family: "Material Design Icons";
+    font-size: 1.7rem;
+}
+/deep/ #github:before {
+    @extend .icon;
+    content: "\F02A4";
+}
+/deep/ #gitea---local:before {
+    @extend .icon;
+    content: "\F02A2";
+}
+/deep/ #colors:before {
+    @extend .icon;
+    content: "\F0301";
+}
+/deep/ #css:before {
+    @extend .icon;
+    content: "\F031C ";
+}
+/deep/ #icon:before {
+    @extend .icon;
+    content: "\F0C05";
+}
+</style>
